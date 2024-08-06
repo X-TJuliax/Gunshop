@@ -1,0 +1,186 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.9.1/font/bootstrap-icons.min.css">
+
+<header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+      <div class="col-md-3 mb-2 mb-md-0">
+        <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
+          <%= image_tag 'noun-handgun-110694.svg', alt: 'brand', width: 75, hegiht: 50 %>
+        </a>
+      </div>
+
+      <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+        <li>
+            <a href="#" class="nav-link px-2 link-secondary">
+            <%= image_tag 'noun-handgun-1067229.svg', alt: 'brand', width: 35, hegiht: 35 %>
+            <span>Handgun</span></a>        
+        </li>
+        <li>
+            <a href="#" class="nav-link px-2">
+            <%= image_tag 'noun-shotgun-4648764.svg', alt: 'brand', width: 35, hegiht: 35 %>
+            <span>Shotgun</span></a>
+        </li>
+        <li>
+            <a href="#" class="nav-link px-2">
+            <%= image_tag 'noun-rifle-6867728.svg', alt: 'brand', width: 35, hegiht: 35 %>
+            <span>Rifle</span></a>
+        </li>
+        <li>
+            <a href="#" class="nav-link px-2">
+            <%= image_tag 'noun-sniper-rifle-6848484.svg', alt: 'brand', width: 35, hegiht: 35 %>
+            <span>Sniper Rifle</span></a>
+        </li>
+         
+      </ul>
+
+      <div class="col-md-3 text-end">
+        <div class="input-group">
+        <input type="text" name="keyword" placeholder="Searching....."
+            class="form-control my-0 py-1 red-border" autocomplete="off">
+        <span class="input-group-text">
+            <i class="bi bi-search"></i>
+        </span>
+        </div>
+      </div>
+</header>
+
+<!-- Slider main container -->
+<div class="swiper">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    <!-- Slides -->
+    <% @products.each do |product| %>
+         <div class="swiper-slide">
+            <img src="<%= Product::PRODUCTS_BACKGROUND_URL[product.name] %>" alt="<%= product.name %>">
+         </div>
+    <% end %> 
+</div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+  <!-- If we need scrollbar -->
+  <div class="swiper-scrollbar"></div>
+</div>
+
+
+<div class="product-grid">
+  <% @products.each do |product| %>
+    <div class="product-item">
+     <img src="<%= Product::PRODUCTS_BACKGROUND_URL[product.name] %>" alt="<%= product.name %>">
+    <h3><%= product.name %></h3>
+     <p><%= number_to_currency(product.price) %></p>
+    <p class="description">
+        <span class="short-description"><%= truncate(product.description, length: 100) %></span>
+        <span class="full-description"><%= product.description %></span>
+   </p>
+   <button class="toggle-description">Read More</button>
+
+     
+    </div>
+  <% end %>
+</div>
+
+<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <div class="col-md-4 d-flex align-items-center">
+      <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+          <%= image_tag 'noun-handgun-110694.svg', alt: 'gunshop', width: 100, hegiht: 50 %>
+      </a>
+      <span class="mb-3 mb-md-0 text-body-secondary">© 2024 Company, Inc</span>
+    </div>
+
+    <div class="col-md-3 text-end">
+    <button type="button" class="btn btn-outline-primary me-2"><%= link_to 'Login', new_user_session_path %></button>
+    <button type="button" class="btn btn-primary">Sign-up</button>
+    </div>
+</footer>
+
+<script>
+  // Initialize Swiper
+  const swiper = new Swiper('.swiper', {
+    // Optional parameters
+    loop: true,
+    autoplay: {
+      delay: 5000, // 5 seconds
+      disableOnInteraction: true,
+    },
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+    // Navigation arrows
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    // If we need scrollbar
+    scrollbar: {
+      el: '.swiper-scrollbar',
+    },
+  });
+
+  // Pause Swiper on mouse enter
+  document.querySelector('.swiper').addEventListener('mouseenter', function() {
+    swiper.autoplay.stop();
+    console.log('slider stopped');
+  });
+
+  // Resume Swiper on mouse leave
+  document.querySelector('.swiper').addEventListener('mouseleave', function() {
+    swiper.autoplay.start();
+    console.log('slider started again');
+  });
+
+  document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.toggle-description').forEach(button => {
+    button.addEventListener('click', function() {
+      const productItem = this.closest('.product-item');
+      const shortDescription = productItem.querySelector('.short-description');
+      const fullDescription = productItem.querySelector('.full-description');
+      const isExpanded = fullDescription.style.display === 'block';
+
+      if (isExpanded) {
+        fullDescription.style.display = 'none';
+        shortDescription.style.display = 'block';
+        this.textContent = 'Read More';
+      } else {
+        fullDescription.style.display = 'block';
+        shortDescription.style.display = 'none';
+        this.textContent = 'Read Less';
+      }
+
+      this.classList.toggle('active');
+    });
+  });
+});
+
+</script>
+
+
+
+            
+
+               
+
+
+
+
+
+
+
+
+      
+
+
+
+
+
+
+
+
+ 
+    
+
+
+

@@ -1,0 +1,106 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+li {
+    padding: 20px;
+}
+
+
+.swiper {
+    width: 60%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    max-width: 60%; /* Set a maximum width for images */
+    max-height: 60%; /* Set a maximum height for images */
+    width: auto;
+    height: auto;
+  }
+  
+  /* Optional: Customize pagination, navigation, etc. */
+  .swiper-pagination {
+    bottom: 10px;
+  }
+  
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: #000;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .swiper-slide img {
+      max-width: 80%;
+      max-height: 80%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .swiper-slide img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  }
+  
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .product-item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  .product-item h3 {
+    margin: 10px 0;
+  }
+  
+  .product-item p {
+    margin: 5px 0;
+    position: relative;
+  }
+  
+  .short-description {
+    display: block;
+  }
+  
+  .full-description {
+    display: none;
+  }
+  
+  .toggle-description {
+    margin-top: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .toggle-description.active {
+    background-color: #0056b3;
+  }
+  
